@@ -7,8 +7,11 @@ from openpyxl.formatting.rule import ColorScaleRule
 from openpyxl.utils import get_column_letter
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+from dotenv import load_dotenv   
 
-TOKEN = "7449004443:AAEVwVSuBiod-6qyAZRszz5livezwTJY21Y"
+
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
 EXCEL_TEMPLATE = r"C:\Users\User\Desktop\Deutsch\Words code\words.xlsx"
 DATA_FOLDER = r"C:\Users\User\Desktop\Deutsch\Words code\user_files"
@@ -132,3 +135,4 @@ app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start_command))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 app.run_polling()
+
